@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:ola_mundo/app_controller.dart';
 
 // Usar o StatefulWidget quando precisar alterar o estado do widget
 class HomePage extends StatefulWidget {
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   List<String> names = ['Daniel', 'Maria', 'João'];
-  bool wasPressed = false;
+  bool isDarkTheme = false;
   String name = '';
 
   @override
@@ -23,30 +24,35 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('HomePage'),
         backgroundColor: Colors.purple[200],
+        actions: [
+          CustomSwitch()
+        ],
       ),
-      body: Container( 
-        width:300,
-        height: 300,
-        color: Colors.purple[100],
-        child: Align( //Align tem rendezirização separada
-          alignment: Alignment.center,
-          child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.black,
-          )
-        ),
+      body: Center(
+          child: CustomSwitch()
       ),
       floatingActionButton: TextButton(
         onPressed: () {
           final int randomIndex = Random().nextInt(names.length);
-          wasPressed = true;
           setState(() {
             name = names[randomIndex];
           });
         },
         child: const Text('Gerar nome'),
       ),
+    );
+  }
+}
+
+
+class CustomSwitch extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+      value: AppController.instance.isDarkTheme,
+      onChanged: (value){
+        AppController.instance.changeTheme();
+      },
     );
   }
 }
