@@ -24,12 +24,17 @@ class HomePageState extends State<HomePage> {
         title: const Text('HomePage'),
         backgroundColor: Colors.purple[200],
       ),
-      body: Center(
-        child: GestureDetector(
-          child: Text(
-            (wasPressed) ? 'Olá $name' : 'Clique para gerar um nome',
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-          ),
+      body: Container( 
+        width:300,
+        height: 300,
+        color: Colors.purple[100],
+        child: Align( //Align tem rendezirização separada
+          alignment: Alignment.center,
+          child: Container(
+            width: 100,
+            height: 100,
+            color: Colors.black,
+          )
         ),
       ),
       floatingActionButton: TextButton(
